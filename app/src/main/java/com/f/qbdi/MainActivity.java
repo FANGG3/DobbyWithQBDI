@@ -3,6 +3,7 @@ package com.f.qbdi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.f.nativelib.NativeLib;
@@ -12,7 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'qbdi' library on application startup.
     static {
-        System.loadLibrary("test");
+        System.loadLibrary("nativelib");
+
     }
 
     private ActivityMainBinding binding;
@@ -26,7 +28,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = binding.sampleText;
+        System.loadLibrary("test");
         tv.setText(stringFromJNI());
+        Log.i("qbdi", String.valueOf(add(1,3)));
+
+
     }
 
     /**
@@ -34,4 +40,6 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+    public native int add(int a, int b);
+
 }
